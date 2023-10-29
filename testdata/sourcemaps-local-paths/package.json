@@ -8,6 +8,6 @@
     "postinstall": "tsc"
   },
   "dependencies": {
-    "typescript": "2.9.2"
+    "typescript": "5.2.2"
   }
 }
