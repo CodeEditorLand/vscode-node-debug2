@@ -1,17 +1,36 @@
 {
   "name": "testdata-webpack",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Test project for vscode-node-debug2 using webpack",
-  "author": "",
+  "author": {
+    "name": "Nikola Hristov",
+    "email": "nikola@nikolahristov.tech",
+    "url": "https://nikolahristov.tech"
+  },
   "license": "MIT",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts"
   },
-  "dependencies": {},
+  
   "devDependencies": {
     "@types/node": "20.8.9",
     "ts-loader": "9.5.0",
     "typescript": "5.2.2",
-    "webpack": "5.89.0"
+    "webpack": "5.89.0",
+    "typescript-esbuild": "0.3.1"
+  },
+  "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
+  "bugs": {
+    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git"
+  },
+  "type": "module",
+  "private": "false",
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "node-debug2",
   "displayName": "[Deprecated] Node Debug",
-  "version": "1.43.0",
+  "version": "0.0.1",
   "publisher": "ms-vscode",
   "description": "%extension.description%",
   "icon": "images/node-debug-icon.png",
@@ -9,7 +9,9 @@
     "Debuggers"
   ],
   "author": {
-    "name": "Microsoft Corporation"
+    "name": "Nikola Hristov",
+    "email": "nikola@nikolahristov.tech",
+    "url": "https://nikolahristov.tech"
   },
   "capabilities": {
     "virtualWorkspaces": false,
@@ -19,7 +21,7 @@
     }
   },
   "license": "MIT",
-  "private": true,
+  "private": "false",
   "dependencies": {
     "minimatch": "9.0.3",
     "vscode-chrome-debug-core": "6.8.11",
@@ -47,7 +49,8 @@
     "vscode-chrome-debug-core-testsupport": "4.1.1",
     "vscode-debugadapter-testsupport": "1.25.0",
     "vscode-debugprotocol": "1.37.0",
-    "vscode-nls-dev": "4.0.4"
+    "vscode-nls-dev": "4.0.4",
+    "typescript-esbuild": "0.3.1"
   },
   "main": "./out/src/extension",
   "activationEvents": [
@@ -64,7 +67,8 @@
     "publish": "gulp publish",
     "patch": "npm version patch -m '%s'",
     "minor": "npm version minor -m '%s'",
-    "package": "gulp package"
+    "package": "gulp package",
+    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts"
   },
   "engines": {
     "vscode": "1.60.0-insider",
@@ -72,10 +76,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/vscode-node-debug2.git"
+    "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git"
   },
   "bugs": {
-    "url": "https://github.com/Microsoft/vscode-node-debug2/issues"
+    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
   },
   "contributes": {
     "breakpoints": [
@@ -501,5 +505,10 @@
         "title": "%toggle.skipping.this.file%"
       }
     ]
+  },
+  "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
   }
 }

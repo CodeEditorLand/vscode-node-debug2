@@ -1,13 +1,18 @@
 {
   "name": "testdata-calls-between-merged-files",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Test project for vscode-node-debug2 using gulp",
-  "author": "",
+  "author": {
+    "name": "Nikola Hristov",
+    "email": "nikola@nikolahristov.tech",
+    "url": "https://nikolahristov.tech"
+  },
   "license": "MIT",
   "scripts": {
-    "build": "gulp build"
+    "build": "gulp build",
+    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts"
   },
-  "dependencies": {},
+  
   "devDependencies": {
     "@types/node": "20.8.9",
     "gulp": "4.0.2",
@@ -15,6 +20,20 @@
     "gulp-filter": "8.0.0",
     "gulp-sourcemaps": "3.0.0",
     "gulp-typescript": "5.0.1",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "typescript-esbuild": "0.3.1"
+  },
+  "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
+  "bugs": {
+    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git"
+  },
+  "type": "module",
+  "private": "false",
+  "publishConfig": {
+    "access": "public"
   }
 }
