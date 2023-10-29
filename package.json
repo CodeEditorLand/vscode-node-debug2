@@ -2,84 +2,39 @@
   "name": "node-debug2",
   "displayName": "[Deprecated] Node Debug",
   "version": "0.0.1",
-  "publisher": "ms-vscode",
+  "private": "false",
   "description": "%extension.description%",
-  "icon": "images/node-debug-icon.png",
   "categories": [
     "Debuggers"
   ],
-  "author": {
-    "name": "Nikola Hristov",
-    "email": "nikola@nikolahristov.tech",
-    "url": "https://nikolahristov.tech"
-  },
-  "capabilities": {
-    "virtualWorkspaces": false,
-    "untrustedWorkspaces": {
-      "supported": "limited",
-      "description": "%workspaceTrust%"
-    }
-  },
-  "license": "MIT",
-  "private": "false",
-  "dependencies": {
-    "minimatch": "9.0.3",
-    "vscode-chrome-debug-core": "6.8.11",
-    "vscode-debugadapter": "1.40.0",
-    "vscode-nls": "5.2.0"
-  },
-  "devDependencies": {
-    "@types/minimatch": "5.1.2",
-    "@types/mocha": "10.0.3",
-    "@types/node": "20.8.9",
-    "@types/vscode": "1.83.1",
-    "del": "7.1.0",
-    "event-stream": "4.0.1",
-    "find-free-port": "2.0.0",
-    "gulp": "4.0.2",
-    "gulp-sourcemaps": "3.0.0",
-    "gulp-tslint": "8.1.4",
-    "gulp-typescript": "5.0.1",
-    "gulp-util": "3.0.5",
-    "minimist": "1.2.8",
-    "mocha": "10.2.0",
-    "tslint": "5.20.1",
-    "typescript": "5.2.2",
-    "vsce": "1.95.1",
-    "vscode-chrome-debug-core-testsupport": "4.1.1",
-    "vscode-debugadapter-testsupport": "1.25.0",
-    "vscode-debugprotocol": "1.37.0",
-    "vscode-nls-dev": "4.0.4",
-    "typescript-esbuild": "0.3.1"
-  },
-  "main": "./out/src/extension",
-  "activationEvents": [
-    "onDebug:legacy-extensionHost",
-    "onDebugResolve:legacy-extensionHost",
-    "onCommand:extension.node-debug2.toggleSkippingFile"
-  ],
-  "scripts": {
-    "build": "gulp build",
-    "watch": "gulp watch",
-    "test": "mocha --timeout 20000 -s 2000 -u tdd --colors --reporter node_modules/vscode-chrome-debug-core-testsupport/out/loggingReporter.js ./out/test/",
-    "vscode:prepublish": "gulp verify-no-linked-modules && gulp build",
-    "tslint": "gulp tslint",
-    "publish": "gulp publish",
-    "patch": "npm version patch -m '%s'",
-    "minor": "npm version minor -m '%s'",
-    "package": "gulp package",
-    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts"
-  },
-  "engines": {
-    "vscode": "1.60.0-insider",
-    "node": ">=10"
+  "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
+  "bugs": {
+    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git"
   },
-  "bugs": {
-    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
+  "license": "MIT",
+  "author": {
+    "name": "Nikola Hristov",
+    "email": "nikola@nikolahristov.tech",
+    "url": "https://nikolahristov.tech"
+  },
+  "publisher": "playform",
+  "type": "module",
+  "main": "./out/src/extension",
+  "scripts": {
+    "build": "gulp build",
+    "minor": "npm version minor -m '%s'",
+    "package": "gulp package",
+    "patch": "npm version patch -m '%s'",
+    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts",
+    "publish": "gulp publish",
+    "test": "mocha --timeout 20000 -s 2000 -u tdd --colors --reporter node_modules/vscode-chrome-debug-core-testsupport/out/loggingReporter.js ./out/test/",
+    "tslint": "gulp tslint",
+    "vscode:prepublish": "gulp verify-no-linked-modules && gulp build",
+    "watch": "gulp watch"
   },
   "contributes": {
     "breakpoints": [
@@ -88,6 +43,12 @@
       },
       {
         "language": "javascriptreact"
+      }
+    ],
+    "commands": [
+      {
+        "command": "extension.node-debug2.toggleSkippingFile",
+        "title": "%toggle.skipping.this.file%"
       }
     ],
     "debuggers": [
@@ -498,17 +459,56 @@
           "when": "inDebugMode && debugType == 'node2' && callStackItemType == 'stackFrame'"
         }
       ]
-    },
-    "commands": [
-      {
-        "command": "extension.node-debug2.toggleSkippingFile",
-        "title": "%toggle.skipping.this.file%"
-      }
-    ]
+    }
   },
-  "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
-  "type": "module",
+  "activationEvents": [
+    "onDebug:legacy-extensionHost",
+    "onDebugResolve:legacy-extensionHost",
+    "onCommand:extension.node-debug2.toggleSkippingFile"
+  ],
+  "dependencies": {
+    "minimatch": "9.0.3",
+    "vscode-chrome-debug-core": "6.8.11",
+    "vscode-debugadapter": "1.40.0",
+    "vscode-nls": "5.2.0"
+  },
+  "devDependencies": {
+    "@types/minimatch": "5.1.2",
+    "@types/mocha": "10.0.3",
+    "@types/node": "20.8.9",
+    "@types/vscode": "1.83.1",
+    "del": "7.1.0",
+    "event-stream": "4.0.1",
+    "find-free-port": "2.0.0",
+    "gulp": "4.0.2",
+    "gulp-sourcemaps": "3.0.0",
+    "gulp-tslint": "8.1.4",
+    "gulp-typescript": "5.0.1",
+    "gulp-util": "3.0.5",
+    "minimist": "1.2.8",
+    "mocha": "10.2.0",
+    "tslint": "5.20.1",
+    "typescript": "5.2.2",
+    "typescript-esbuild": "0.3.1",
+    "vsce": "1.95.1",
+    "vscode-chrome-debug-core-testsupport": "4.1.1",
+    "vscode-debugadapter-testsupport": "1.25.0",
+    "vscode-debugprotocol": "1.37.0",
+    "vscode-nls-dev": "4.0.4"
+  },
+  "engines": {
+    "node": ">=10",
+    "vscode": "1.60.0-insider"
+  },
   "publishConfig": {
     "access": "public"
+  },
+  "icon": "images/node-debug-icon.png",
+  "capabilities": {
+    "virtualWorkspaces": false,
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "%workspaceTrust%"
+    }
   }
 }

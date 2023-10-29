@@ -1,20 +1,8 @@
 {
   "name": "sourcemaps-local-paths",
   "version": "0.0.1",
+  "private": "false",
   "description": "",
-  "author": {
-    "name": "Nikola Hristov",
-    "email": "nikola@nikolahristov.tech",
-    "url": "https://nikolahristov.tech"
-  },
-  "license": "MIT",
-  "scripts": {
-    "postinstall": "tsc",
-    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts"
-  },
-  "dependencies": {
-    "typescript": "5.2.2"
-  },
   "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
   "bugs": {
     "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
@@ -23,12 +11,25 @@
     "type": "git",
     "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git"
   },
+  "license": "MIT",
+  "author": {
+    "name": "Nikola Hristov",
+    "email": "nikola@nikolahristov.tech",
+    "url": "https://nikolahristov.tech"
+  },
+  "publisher": "playform",
   "type": "module",
-  "private": "false",
-  "publishConfig": {
-    "access": "public"
+  "scripts": {
+    "postinstall": "tsc",
+    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts"
+  },
+  "dependencies": {
+    "typescript": "5.2.2"
   },
   "devDependencies": {
     "typescript-esbuild": "0.3.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -1,25 +1,8 @@
 {
   "name": "testdata-webpack",
   "version": "0.0.1",
+  "private": "false",
   "description": "Test project for vscode-node-debug2 using webpack",
-  "author": {
-    "name": "Nikola Hristov",
-    "email": "nikola@nikolahristov.tech",
-    "url": "https://nikolahristov.tech"
-  },
-  "license": "MIT",
-  "scripts": {
-    "build": "webpack",
-    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts"
-  },
-  
-  "devDependencies": {
-    "@types/node": "20.8.9",
-    "ts-loader": "9.5.0",
-    "typescript": "5.2.2",
-    "webpack": "5.89.0",
-    "typescript-esbuild": "0.3.1"
-  },
   "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
   "bugs": {
     "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
@@ -28,8 +11,25 @@
     "type": "git",
     "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git"
   },
+  "license": "MIT",
+  "author": {
+    "name": "Nikola Hristov",
+    "email": "nikola@nikolahristov.tech",
+    "url": "https://nikolahristov.tech"
+  },
+  "publisher": "playform",
   "type": "module",
-  "private": "false",
+  "scripts": {
+    "build": "webpack",
+    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts"
+  },
+  "devDependencies": {
+    "@types/node": "20.8.9",
+    "ts-loader": "9.5.0",
+    "typescript": "5.2.2",
+    "typescript-esbuild": "0.3.1",
+    "webpack": "5.89.0"
+  },
   "publishConfig": {
     "access": "public"
   }
