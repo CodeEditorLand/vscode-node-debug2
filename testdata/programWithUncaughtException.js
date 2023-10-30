@@ -1,2 +1,2 @@
-console.log('hi');
-throw new Error('uncaught exception');
+console.log("hi");
+throw new Error("uncaught exception");

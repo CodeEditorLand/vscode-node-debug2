@@ -1,3 +1,3 @@
-import './file2.mjs';
+import "./file2.mjs";
 
-console.log('file1 loaded');
+console.log("file1 loaded");

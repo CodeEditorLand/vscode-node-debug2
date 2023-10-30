@@ -1,12 +1,12 @@
 "use strict";
 function callbackCaller1(cb) {
-    callbackCaller2(cb);
+	callbackCaller2(cb);
 }
 exports.callbackCaller1 = callbackCaller1;
 
-"use strict";
+("use strict");
 function callbackCaller2(cb) {
-    cb();
+	cb();
 }
 exports.callbackCaller2 = callbackCaller2;
 
