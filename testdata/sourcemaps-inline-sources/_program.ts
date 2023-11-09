@@ -1,8 +1,8 @@
-console.log("Program loaded");
+console.log('Program loaded');
 
 function f() {
-	console.log("interval");
-	debugger;
+    console.log('interval');
+    debugger;
 }
 
 setInterval(f, 200);

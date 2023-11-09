@@ -1,3 +1,3 @@
-eval("let x = 1");
+eval('let x = 1');
 
 let y = 2;
