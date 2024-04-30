@@ -1,13 +1,36 @@
 {
-  "name": "sourcemaps-local-paths",
-  "version": "1.0.0",
-  "description": "",
-  "author": "roblourens",
-  "license": "MIT",
-  "scripts": {
-    "postinstall": "tsc"
-  },
-  "dependencies": {
-    "typescript": "2.9.2"
-  }
+	"name": "sourcemaps-local-paths",
+	"version": "0.0.1",
+	"private": false,
+	"description": "",
+	"keywords": [
+		"land"
+	],
+	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandNodeDebug2#readme",
+	"bugs": {
+		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandNodeDebug2/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+HTTPS://github.com/CodeEditorLand/LandNodeDebug2.git"
+	},
+	"license": "SEE LICENSE IN LICENSE",
+	"author": {
+		"name": "🌆 — Land —",
+		"email": "Land@PlayForm.Cloud",
+		"url": "HTTPS://Land.PlayForm.Cloud"
+	},
+	"type": "module",
+	"scripts": {
+		"Document": "Document 'Source/**/*.ts'",
+		"prepublishOnly": "Build 'Source/**/*.ts'"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@playform/build": "0.0.7",
+		"@playform/document": "0.0.6"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }
