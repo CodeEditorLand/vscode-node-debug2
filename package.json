@@ -468,7 +468,7 @@
 		"@playform/build": "0.0.7",
 		"@playform/document": "0.0.6",
 		"@types/minimatch": "5.1.2",
-		"@types/node": "20.12.7",
+		"@types/node": "20.12.10",
 		"del": "7.1.0",
 		"event-stream": "4.0.1",
 		"find-free-port": "2.0.0",
