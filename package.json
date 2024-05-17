@@ -1,27 +1,7 @@
 {
 	"name": "node-debug2",
 	"displayName": "[Deprecated] Node Debug",
-	"version": "0.0.1",
-	"private": false,
 	"description": "%extension.description%",
-	"keywords": [
-		"land"
-	],
-	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandNodeDebug2#readme",
-	"bugs": {
-		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandNodeDebug2/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+HTTPS://github.com/CodeEditorLand/LandNodeDebug2.git"
-	},
-	"license": "SEE LICENSE IN LICENSE",
-	"author": {
-		"name": "🛬 Land —",
-		"email": "Land@PlayForm.Cloud",
-		"url": "HTTPS://Land.PlayForm.Cloud"
-	},
-	"type": "module",
 	"main": "./out/src/extension",
 	"scripts": {
 		"Document": "Document 'Source/**/*.ts'",
@@ -466,16 +446,12 @@
 	},
 	"devDependencies": {
 		"@playform/build": "0.0.7",
-		"@playform/document": "0.0.6",
 		"@types/minimatch": "5.1.2",
 		"@types/node": "20.12.10",
 		"del": "7.1.0",
 		"event-stream": "4.0.1",
 		"find-free-port": "2.0.0",
 		"minimist": "1.2.8"
-	},
-	"publishConfig": {
-		"access": "public"
 	},
 	"icon": "images/node-debug-icon.png",
 	"capabilities": {
