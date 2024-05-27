@@ -15,9 +15,9 @@
 	"node.enableSourceMapCaching.description": "When sourcemaps are downloaded from a URL, cache them to disk.",
 
 	"node.diagnosticLogging.description": "When true, the adapter logs its own diagnostic info to the console",
-	"node.diagnosticLogging.deprecationMessage": "'diagnosticLogging' is deprecated. Use 'trace' instead.",
+		"node.diagnosticLogging.deprecationMessage": "'diagnosticLogging' is deprecated. Use 'trace' instead.",
 	"node.verboseDiagnosticLogging.description": "When true, the adapter logs all traffic with the client and target (as well as the info logged by 'diagnosticLogging')",
-	"node.verboseDiagnosticLogging.deprecationMessage": "'verboseDiagnosticLogging' is deprecated. Use 'trace' instead.",
+		"node.verboseDiagnosticLogging.deprecationMessage": "'verboseDiagnosticLogging' is deprecated. Use 'trace' instead.",
 	"node.trace.description": "When 'true', the debugger will log tracing info to a file. When 'verbose', it will also show logs in the console.",
 
 	"node.sourceMapPathOverrides.description": "A set of mappings for rewriting the locations of source files from what the sourcemap says, to their locations on disk. See README for details.",
@@ -33,7 +33,7 @@
 	"node.launch.cwd.description": "Absolute path to the working directory of the program being debugged.",
 	"node.launch.runtimeExecutable.description": "Runtime to use. Either an absolute path or the name of a runtime available on the PATH. If ommitted `node` is assumed.",
 	"node.launch.runtimeArgs.description": "Optional arguments passed to the runtime executable.",
-	"node.launch.env.description": "Environment variables passed to the program. The value `null` removes the variable from the environment.",
+    "node.launch.env.description": "Environment variables passed to the program. The value `null` removes the variable from the environment.",
 	"node.launch.envFile.description": "Absolute path to a file containing environment variable definitions.",
 	"node.launch.outputCapture.description": "From where to capture output messages: The debug API, or stdout/stderr streams.",
 
