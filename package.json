@@ -437,16 +437,16 @@
 		}
 	},
 	"dependencies": {
-		"minimatch": "^9.0.4"
+		"minimatch": "9.0.4"
 	},
 	"description": "%extension.description%",
 	"devDependencies": {
-		"@types/minimatch": "^5.1.2",
-		"@types/node": "^20.14.2",
-		"del": "^7.1.0",
-		"event-stream": "^4.0.1",
-		"find-free-port": "^2.0.0",
-		"minimist": "^1.2.8"
+		"@types/minimatch": "5.1.2",
+		"@types/node": "20.14.2",
+		"del": "7.1.0",
+		"event-stream": "4.0.1",
+		"find-free-port": "2.0.0",
+		"minimist": "1.2.8"
 	},
 	"displayName": "[Deprecated] Node Debug",
 	"icon": "images/node-debug-icon.png",
