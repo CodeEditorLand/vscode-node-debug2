@@ -1,17 +1,12 @@
 {
-  "name": "testdata-webpack",
-  "version": "1.0.0",
-  "description": "Test project for vscode-node-debug2 using webpack",
-  "author": "",
-  "license": "MIT",
-  "scripts": {
-    "build": "webpack"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "@types/node": "20.14.5",
-    "ts-loader": "9.5.1",
-    "typescript": "5.4.5",
-    "webpack": "5.92.0"
-  }
+	"name": "testdata-webpack",
+	"description": "Test project for vscode-node-debug2 using webpack",
+	"scripts": {
+		"build": "webpack"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@types/node": "20.14.5",
+		"ts-loader": "9.5.1"
+	}
 }
