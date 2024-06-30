@@ -1,6 +1,6 @@
 {
-	"dependencies": {},
-	"description": "",
 	"name": "sourcemaps-local-paths",
-	"scripts": {}
+	"description": "",
+	"scripts": {},
+	"dependencies": {}
 }
