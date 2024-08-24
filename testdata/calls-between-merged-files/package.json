@@ -2,7 +2,7 @@
 	"dependencies": {},
 	"description": "Test project for vscode-node-debug2 using gulp",
 	"devDependencies": {
-		"@types/node": "^6.0.41"
+		"@types/node": "22.4.0"
 	},
 	"name": "testdata-calls-between-merged-files",
 	"scripts": {
