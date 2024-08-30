@@ -1,9 +1,0 @@
-{
-    "compilerOptions": {
-        "inlineSourceMap": true,
-        "outDir": "dist/"
-    },
-    "include": [
-        "src/**/*.ts"
-    ]
-}
