@@ -1,15 +1,13 @@
 {
-	"activationEvents": [
-		"onDebug:legacy-extensionHost",
-		"onDebugResolve:legacy-extensionHost",
-		"onCommand:extension.node-debug2.toggleSkippingFile"
-	],
-	"capabilities": {
-		"untrustedWorkspaces": {
-			"description": "%workspaceTrust%",
-			"supported": "limited"
-		},
-		"virtualWorkspaces": false
+	"name": "node-debug2",
+	"displayName": "[Deprecated] Node Debug",
+	"description": "%extension.description%",
+	"main": "./out/src/extension",
+	"scripts": {
+		"build": "gulp build",
+		"minor": "npm version minor -m '%s'",
+		"patch": "npm version patch -m '%s'",
+		"publish": "gulp publish"
 	},
 	"contributes": {
 		"breakpoints": [
@@ -436,10 +434,14 @@
 			]
 		}
 	},
+	"activationEvents": [
+		"onDebug:legacy-extensionHost",
+		"onDebugResolve:legacy-extensionHost",
+		"onCommand:extension.node-debug2.toggleSkippingFile"
+	],
 	"dependencies": {
 		"minimatch": "10.0.1"
 	},
-	"description": "%extension.description%",
 	"devDependencies": {
 		"@types/minimatch": "5.1.2",
 		"@types/node": "22.7.3",
@@ -448,14 +450,12 @@
 		"find-free-port": "2.0.0",
 		"minimist": "1.2.8"
 	},
-	"displayName": "[Deprecated] Node Debug",
 	"icon": "images/node-debug-icon.png",
-	"main": "./out/src/extension",
-	"name": "node-debug2",
-	"scripts": {
-		"build": "gulp build",
-		"minor": "npm version minor -m '%s'",
-		"patch": "npm version patch -m '%s'",
-		"publish": "gulp publish"
+	"capabilities": {
+		"untrustedWorkspaces": {
+			"description": "%workspaceTrust%",
+			"supported": "limited"
+		},
+		"virtualWorkspaces": false
 	}
 }
