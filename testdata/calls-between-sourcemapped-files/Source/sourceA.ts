@@ -1,9 +1,9 @@
-import {callbackCaller} from './sourceB';
+import { callbackCaller } from "./sourceB";
 
 function f() {
-    console.log('mapped');
+	console.log("mapped");
 }
 
 setInterval(() => {
-    callbackCaller(f);
+	callbackCaller(f);
 }, 500);

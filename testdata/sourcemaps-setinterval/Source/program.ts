@@ -1,6 +1,7 @@
-console.log('Program loaded');
+import { Foo } from "./file2";
 
-import {Foo} from './file2';
-const foo = new Foo('foo');
+console.log("Program loaded");
+
+const foo = new Foo("foo");
 
 setInterval(() => foo.getName(), 100);
