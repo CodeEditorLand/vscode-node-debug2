@@ -1,7 +1,7 @@
-const fs = require("fs");
+const fs = require('fs');
 
 try {
-	fs.readFileSync("sldfk");
+    fs.readFileSync('sldfk');
 } catch (e) {}
 
-console.log("done");
+console.log('done');
