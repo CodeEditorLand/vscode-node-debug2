@@ -1,12 +1,11 @@
 export class Foo {
+	private _name: string;
 
-  private _name: string;
+	constructor(name: string) {
+		this._name = name;
+	}
 
-  constructor(name: string) {
-    this._name = name;
-  }
-
-  getName(): string {
-    return this._name;
-  }
+	getName(): string {
+		return this._name;
+	}
 }

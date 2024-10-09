@@ -1,7 +1,7 @@
-import {callbackCaller} from './unmapped';
+import { callbackCaller } from "./unmapped";
 
 function f() {
-    console.log('mapped');
+	console.log("mapped");
 }
 
 callbackCaller(f);
