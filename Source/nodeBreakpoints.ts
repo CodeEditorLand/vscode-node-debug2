@@ -31,12 +31,14 @@ export class NodeBreakpoints extends Breakpoints {
 		scripts: ScriptContainer,
 	): Promise<ISetBreakpointResult[]> {
 		const responses = await super.addBreakpoints(url, breakpoints, scripts);
+
 		if (
 			this.nodeDebugAdapter.entryPauseEvent &&
 			!this.nodeDebugAdapter.finishedConfig
 		) {
 			const entryLocation =
 				this.nodeDebugAdapter.entryPauseEvent.callFrames[0].location;
+
 			const bpAtEntryLocationIdx = responses.findIndex((response) => {
 				// Don't compare column location, because you can have a bp at col 0, then break at some other column
 				return (
@@ -47,11 +49,13 @@ export class NodeBreakpoints extends Breakpoints {
 					response.actualLocation.scriptId === entryLocation.scriptId
 				);
 			});
+
 			const bpAtEntryLocation =
 				bpAtEntryLocationIdx >= 0 && breakpoints[bpAtEntryLocationIdx];
 
 			if (bpAtEntryLocation) {
 				let conditionPassed = true;
+
 				if (bpAtEntryLocation.condition) {
 					const evalConditionResponse =
 						await this.nodeDebugAdapter.evaluateOnCallFrame(

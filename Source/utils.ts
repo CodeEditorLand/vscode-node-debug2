@@ -27,6 +27,7 @@ export class JavaScriptDeterminant {
 
 	public isJavaScript(aPath: string) {
 		const basename = path.basename(aPath);
+
 		const matchesPattern = [
 			...JavaScriptDeterminant.defaultPatterns,
 			...this.customPatterns,
@@ -38,10 +39,13 @@ export class JavaScriptDeterminant {
 	private isShebang(aPath: string) {
 		try {
 			const buffer = Buffer.alloc(30);
+
 			const fd = fs.openSync(aPath, "r");
 			fs.readSync(fd, buffer, 0, buffer.length, 0);
 			fs.closeSync(fd);
+
 			const line = buffer.toString();
+
 			return NODE_SHEBANG_MATCHER.test(line);
 		} catch (e) {
 			return false;
@@ -56,6 +60,7 @@ export function random(low: number, high: number): number {
 export function killTree(processId: number): void {
 	if (process.platform === "win32") {
 		const windir = process.env["WINDIR"] || "C:\\Windows";
+
 		const TASK_KILL = path.join(windir, "System32", "taskkill.exe");
 
 		// when killing a process in Windows its child processes are *not* killed but become root processes.
@@ -96,6 +101,7 @@ export function stripBOM(s: string): string {
 const semverRegex = /v?(\d+)\.(\d+)\.(\d+)/;
 export function compareSemver(a: string, b: string): number {
 	const aNum = versionStringToNumber(a);
+
 	const bNum = versionStringToNumber(b);
 
 	return aNum - bNum;
@@ -103,6 +109,7 @@ export function compareSemver(a: string, b: string): number {
 
 function versionStringToNumber(str: string): number {
 	const match = str.match(semverRegex);
+
 	if (!match) {
 		throw new Error("Invalid node version string: " + str);
 	}

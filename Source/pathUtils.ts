@@ -21,6 +21,7 @@ export function makePathAbsolute(absPath: string, relPath: string): string {
 export function removeFirstSegment(path: string): string {
 	const segments = path.split(Path.sep);
 	segments.shift();
+
 	if (segments.length > 0) {
 		return segments.join(Path.sep);
 	}
@@ -33,12 +34,15 @@ export function removeFirstSegment(path: string): string {
  */
 export function makeRelative(target: string, path: string): string {
 	const t = target.split(Path.sep);
+
 	const p = path.split(Path.sep);
 
 	let i = 0;
+
 	for (; i < Math.min(t.length, p.length) && t[i] === p[i]; i++) {}
 
 	let result = "";
+
 	for (; i < p.length; i++) {
 		result = Path.join(result, p[i]);
 	}
@@ -50,6 +54,7 @@ export function makeRelative(target: string, path: string): string {
  */
 export function normalizeDriveLetter(path: string): string {
 	const regex = /^([A-Z])(\:[\\\/].*)$/;
+
 	if (regex.test(path)) {
 		path = path.replace(regex, (s, s1, s2) => s1.toLowerCase() + s2);
 	}
@@ -70,6 +75,7 @@ export function pathCompare(path1: string, path2: string): boolean {
  */
 export function realCasePath(path: string): string {
 	let dir = Path.dirname(path);
+
 	if (path === dir) {
 		// end recursion
 		// is this an upper case drive letter?
@@ -79,8 +85,10 @@ export function realCasePath(path: string): string {
 		return path;
 	}
 	let name = Path.basename(path).toLowerCase();
+
 	try {
 		let entries = FS.readdirSync(dir);
+
 		let found = entries.filter((e) => e.toLowerCase() === name); // use a case insensitive search
 		if (found.length === 1) {
 			// on a case sensitive filesystem we cannot determine here, whether the file exists or not, hence we need the 'file exists' precondition
@@ -91,6 +99,7 @@ export function realCasePath(path: string): string {
 		} else if (found.length > 1) {
 			// must be a case sensitive $filesystem
 			const ix = found.indexOf(name);
+
 			if (ix >= 0) {
 				// case sensitive
 				let prefix = realCasePath(dir); // recurse
@@ -116,6 +125,7 @@ export function isSymlinkedPath(path: string): Promise<boolean> {
 				resolve(true);
 			} else {
 				const parent = Path.dirname(path);
+
 				if (parent === path) {
 					resolve(false);
 				} else {
@@ -159,11 +169,13 @@ export function isAbsolutePath(path: string) {
  */
 export function normalize(path: string): string {
 	path = path.replace(/\\/g, "/");
+
 	if (/^[a-zA-Z]\:\//.test(path)) {
 		path = "/" + path;
 	}
 	path = Path.normalize(path); // use node's normalize to remove '<dir>/..' etc.
 	path = path.replace(/\\/g, "/");
+
 	return path;
 }
 
@@ -175,6 +187,7 @@ export function toWindows(path: string): string {
 		path = path.substr(1);
 	}
 	path = path.replace(/\//g, "\\");
+
 	return path;
 }
 
@@ -184,6 +197,7 @@ export function toWindows(path: string): string {
 export function join(absPath: string, relPath: string): string {
 	absPath = normalize(absPath);
 	relPath = normalize(relPath);
+
 	if (absPath.charAt(absPath.length - 1) === "/") {
 		absPath = absPath + relPath;
 	} else {
@@ -191,6 +205,7 @@ export function join(absPath: string, relPath: string): string {
 	}
 	absPath = Path.normalize(absPath);
 	absPath = absPath.replace(/\\/g, "/");
+
 	return absPath;
 }
 
@@ -202,6 +217,7 @@ export function makeRelative2(from: string, to: string): string {
 	to = normalize(to);
 
 	const froms = from.substr(1).split("/");
+
 	const tos = to.substr(1).split("/");
 
 	while (froms.length > 0 && tos.length > 0 && froms[0] === tos[0]) {
@@ -210,6 +226,7 @@ export function makeRelative2(from: string, to: string): string {
 	}
 
 	let l = froms.length - tos.length;
+
 	if (l === 0) {
 		l = tos.length - 1;
 	}
@@ -228,6 +245,7 @@ export function findOnPath(program: string, args_env: any): string | undefined {
 	const env = extendObject(extendObject({}, process.env), args_env);
 
 	let locator: string;
+
 	if (process.platform === "win32") {
 		const windir = env["WINDIR"] || "C:\\Windows";
 		locator = Path.join(windir, "System32", "where.exe");
@@ -240,11 +258,14 @@ export function findOnPath(program: string, args_env: any): string | undefined {
 			const lines = CP.execSync(`${locator} ${program}`, { env })
 				.toString()
 				.split(/\r?\n/);
+
 			if (process.platform === "win32") {
 				// return the first path that has a executable extension
 				const executableExtensions = env["PATHEXT"].toUpperCase();
+
 				for (const path of lines) {
 					const ext = Path.extname(path).toUpperCase();
+
 					if (ext && executableExtensions.indexOf(ext + ";") > 0) {
 						return path;
 					}
@@ -277,10 +298,13 @@ export function findExecutable(
 
 	if (process.platform === "win32" && !Path.extname(program)) {
 		const PATHEXT = env["PATHEXT"];
+
 		if (PATHEXT) {
 			const executableExtensions = PATHEXT.split(";");
+
 			for (const extension of executableExtensions) {
 				const path = program + extension;
+
 				if (FS.existsSync(path)) {
 					return path;
 				}

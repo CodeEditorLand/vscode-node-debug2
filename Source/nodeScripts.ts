@@ -26,6 +26,7 @@ export class NodeScriptContainer extends ScriptContainer {
 		const match = displayPath.match(
 			new RegExp(`^${NodeDebugAdapter.NODE_INTERNALS}[\\\\/](.*)`),
 		);
+
 		return match ? match[1] : super.displayPathToRealPath(displayPath);
 	}
 }

@@ -3,6 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 const isWindows = process.platform === "win32";
+
 const is64bit = process.arch === "x64";
 
 export function subsystemForLinuxPresent(): boolean {
@@ -15,12 +16,15 @@ export function subsystemForLinuxPresent(): boolean {
 		"Sysnative",
 		"bash.exe",
 	);
+
 	const bashPath64bitApp = path.join(
 		process.env["SystemRoot"],
 		"System32",
 		"bash.exe",
 	);
+
 	const bashPathHost = is64bit ? bashPath64bitApp : bashPath32bitApp;
+
 	return fs.existsSync(bashPathHost);
 }
 
@@ -57,12 +61,15 @@ export function createLaunchArg(
 			"Sysnative",
 			"bash.exe",
 		);
+
 		const bashPath64bitApp = path.join(
 			process.env["SystemRoot"],
 			"System32",
 			"bash.exe",
 		);
+
 		const bashPathHost = is64bit ? bashPath64bitApp : bashPath32bitApp;
+
 		const subsystemLinuxPath = useExternalConsole
 			? bashPath64bitApp
 			: bashPathHost;
@@ -77,6 +84,7 @@ export function createLaunchArg(
 				return element.indexOf(" ") > 0 ? `'${element}'` : element;
 			})
 			.join(" ");
+
 		return <ILaunchArgs>{
 			cwd,
 			executable: subsystemLinuxPath,
@@ -108,6 +116,7 @@ export function spawn(
 		executable,
 		args,
 	);
+
 	return child_process.spawn(launchArgs.executable, launchArgs.args, options);
 }
 
@@ -124,6 +133,7 @@ export function spawnSync(
 		executable,
 		args,
 	);
+
 	return child_process.spawnSync(
 		launchArgs.executable,
 		launchArgs.args,
