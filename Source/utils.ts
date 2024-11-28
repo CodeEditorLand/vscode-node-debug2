@@ -99,6 +99,7 @@ export function stripBOM(s: string): string {
 }
 
 const semverRegex = /v?(\d+)\.(\d+)\.(\d+)/;
+
 export function compareSemver(a: string, b: string): number {
 	const aNum = versionStringToNumber(a);
 
