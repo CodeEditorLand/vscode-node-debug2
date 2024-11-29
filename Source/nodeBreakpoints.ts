@@ -62,6 +62,7 @@ export class NodeBreakpoints extends Breakpoints {
 							bpAtEntryLocation.condition,
 							this.nodeDebugAdapter.entryPauseEvent.callFrames[0],
 						);
+
 					conditionPassed =
 						!evalConditionResponse.exceptionDetails &&
 						(!!evalConditionResponse.result.objectId ||
@@ -74,7 +75,9 @@ export class NodeBreakpoints extends Breakpoints {
 					logger.log(
 						"Got a breakpoint set in the entry location, so will stop even though stopOnEntry is not set",
 					);
+
 					this.nodeDebugAdapter.continueAfterConfigDone = false;
+
 					this.nodeDebugAdapter.expectingStopReason = "breakpoint";
 				} else {
 					logger.log(

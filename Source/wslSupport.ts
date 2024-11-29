@@ -40,10 +40,15 @@ function windowsPathToWSLPath(windowsPath: string): string {
 
 export interface ILaunchArgs {
 	cwd: string;
+
 	executable: string;
+
 	args: string[];
+
 	combined: string[];
+
 	localRoot?: string;
+
 	remoteRoot?: string;
 }
 
@@ -81,6 +86,7 @@ export function createLaunchArg(
 					// workaround for issue #35249
 					element = element.replace(/\\/g, "/");
 				}
+
 				return element.indexOf(" ") > 0 ? `'${element}'` : element;
 			})
 			.join(" ");

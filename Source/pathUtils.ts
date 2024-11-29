@@ -20,11 +20,13 @@ export function makePathAbsolute(absPath: string, relPath: string): string {
  */
 export function removeFirstSegment(path: string): string {
 	const segments = path.split(Path.sep);
+
 	segments.shift();
 
 	if (segments.length > 0) {
 		return segments.join(Path.sep);
 	}
+
 	return null;
 }
 
@@ -46,6 +48,7 @@ export function makeRelative(target: string, path: string): string {
 	for (; i < p.length; i++) {
 		result = Path.join(result, p[i]);
 	}
+
 	return result;
 }
 
@@ -58,6 +61,7 @@ export function normalizeDriveLetter(path: string): string {
 	if (regex.test(path)) {
 		path = path.replace(regex, (s, s1, s2) => s1.toLowerCase() + s2);
 	}
+
 	return path;
 }
 
@@ -82,8 +86,10 @@ export function realCasePath(path: string): string {
 		if (/^[A-Z]\:\\$/.test(path)) {
 			path = path.toLowerCase();
 		}
+
 		return path;
 	}
+
 	let name = Path.basename(path).toLowerCase();
 
 	try {
@@ -111,6 +117,7 @@ export function realCasePath(path: string): string {
 	} catch (error) {
 		// silently ignore error
 	}
+
 	return null;
 }
 
@@ -142,6 +149,7 @@ export function isSymlinkedPath(path: string): Promise<boolean> {
 export function mkdirs(path: string) {
 	if (!FS.existsSync(path)) {
 		mkdirs(Path.dirname(path));
+
 		FS.mkdirSync(path);
 	}
 }
@@ -156,10 +164,12 @@ export function isAbsolutePath(path: string) {
 		if (path.charAt(0) === "/") {
 			return true;
 		}
+
 		if (/^[a-zA-Z]\:[\\\/]/.test(path)) {
 			return true;
 		}
 	}
+
 	return false;
 }
 
@@ -173,6 +183,7 @@ export function normalize(path: string): string {
 	if (/^[a-zA-Z]\:\//.test(path)) {
 		path = "/" + path;
 	}
+
 	path = Path.normalize(path); // use node's normalize to remove '<dir>/..' etc.
 	path = path.replace(/\\/g, "/");
 
@@ -186,6 +197,7 @@ export function toWindows(path: string): string {
 	if (/^\/[a-zA-Z]\:\//.test(path)) {
 		path = path.substr(1);
 	}
+
 	path = path.replace(/\//g, "\\");
 
 	return path;
@@ -196,6 +208,7 @@ export function toWindows(path: string): string {
  */
 export function join(absPath: string, relPath: string): string {
 	absPath = normalize(absPath);
+
 	relPath = normalize(relPath);
 
 	if (absPath.charAt(absPath.length - 1) === "/") {
@@ -203,7 +216,9 @@ export function join(absPath: string, relPath: string): string {
 	} else {
 		absPath = absPath + "/" + relPath;
 	}
+
 	absPath = Path.normalize(absPath);
+
 	absPath = absPath.replace(/\\/g, "/");
 
 	return absPath;
@@ -214,6 +229,7 @@ export function join(absPath: string, relPath: string): string {
  */
 export function makeRelative2(from: string, to: string): string {
 	from = normalize(from);
+
 	to = normalize(to);
 
 	const froms = from.substr(1).split("/");
@@ -222,6 +238,7 @@ export function makeRelative2(from: string, to: string): string {
 
 	while (froms.length > 0 && tos.length > 0 && froms[0] === tos[0]) {
 		froms.shift();
+
 		tos.shift();
 	}
 
@@ -233,8 +250,10 @@ export function makeRelative2(from: string, to: string): string {
 
 	while (l > 0) {
 		tos.unshift("..");
+
 		l--;
 	}
+
 	return tos.join("/");
 }
 
@@ -248,6 +267,7 @@ export function findOnPath(program: string, args_env: any): string | undefined {
 
 	if (process.platform === "win32") {
 		const windir = env["WINDIR"] || "C:\\Windows";
+
 		locator = Path.join(windir, "System32", "where.exe");
 	} else {
 		locator = "/usr/bin/which";
@@ -281,6 +301,7 @@ export function findOnPath(program: string, args_env: any): string | undefined {
 		} else {
 			// do not report failure if 'locator' app doesn't exist
 		}
+
 		return program;
 	} catch (err) {
 		// fall through
@@ -325,5 +346,6 @@ export function extendObject<T>(toObject: T, fromObject: T): T {
 			toObject[key] = fromObject[key];
 		}
 	}
+
 	return toObject;
 }

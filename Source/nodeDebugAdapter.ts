@@ -49,14 +49,19 @@ const DefaultSourceMapPathOverrides: ISourceMapPathOverrides = {
 export class ProcessEvent extends Event implements DebugProtocol.ProcessEvent {
 	body: {
 		name: string;
+
 		systemProcessId?: number;
+
 		isLocalProcess?: boolean;
+
 		startMethod?: "launch" | "attach" | "attachForSuspendedLaunch";
+
 		pointerSize?: number;
 	};
 
 	public constructor(name: string, systemProcessId?: number) {
 		super("process");
+
 		this.body = {
 			name,
 			systemProcessId,
@@ -65,8 +70,11 @@ export class ProcessEvent extends Event implements DebugProtocol.ProcessEvent {
 }
 export class NodeDebugAdapter extends ChromeDebugAdapter {
 	private static NODE = "node";
+
 	private static RUNINTERMINAL_TIMEOUT = 5000;
+
 	private static NODE_TERMINATION_POLL_INTERVAL = 3000;
+
 	private static DEBUG_BRK_DEP_MSG =
 		/\(node:\d+\) \[DEP0062\] DeprecationWarning: `node --inspect --debug-brk` is deprecated\. Please use `node --inspect-brk` instead\.\s*/;
 
@@ -75,21 +83,32 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 	protected _launchAttachArgs: ICommonRequestArgs;
 
 	private _jsDeterminant = new utils.JavaScriptDeterminant();
+
 	private _loggedTargetVersion: boolean;
+
 	private _nodeProcessId: number;
+
 	private _pollForNodeProcess: boolean;
 
 	// Flags relevant during init
 	private _continueAfterConfigDone = true;
+
 	private _entryPauseEvent: Crdp.Debugger.PausedEvent;
+
 	private _waitingForEntryPauseEvent = true;
+
 	private _finishedConfig = false;
+
 	private _handlingEarlyNodeMsgs = true;
+
 	private _captureFromStd: boolean = false;
 
 	private _supportsRunInTerminalRequest: boolean;
+
 	private _restartMode: boolean;
+
 	private _isTerminated: boolean;
+
 	private _adapterID: string;
 
 	get entryPauseEvent(): Crdp.Debugger.PausedEvent | undefined {
@@ -151,7 +170,9 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 		args: DebugProtocol.InitializeRequestArguments,
 	): DebugProtocol.Capabilities {
 		this._adapterID = args.adapterID;
+
 		this._promiseRejectExceptionFilterEnabled = this.isExtensionHost();
+
 		this._supportsRunInTerminalRequest = args.supportsRunInTerminalRequest;
 
 		if (args.locale) {
@@ -159,7 +180,9 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 		}
 
 		const capabilities = super.initialize(args);
+
 		capabilities.supportsLogPoints = true;
+
 		capabilities.supportsTerminateRequest = this.supportsTerminateRequest;
 
 		return capabilities;
@@ -321,6 +344,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 		} else if (resolvedProgramPath) {
 			// if no working dir given, we use the direct folder of the executable
 			cwd = path.dirname(resolvedProgramPath);
+
 			program = (await pathUtils.isSymlinkedPath(cwd))
 				? resolvedProgramPath
 				: path.basename(resolvedProgramPath);
@@ -342,6 +366,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 			// Always stop on entry to set breakpoints
 			if (debugArgs === DebugArgs.Inspect_DebugBrk) {
 				launchArgs.push(`--inspect=${port}`);
+
 				launchArgs.push("--debug-brk");
 			} else {
 				launchArgs.push(`--inspect-brk=${port}`);
@@ -387,6 +412,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 				args: wslLaunchArgs.combined,
 				env: envArgs,
 			};
+
 			await this.launchInTerminal(termArgs);
 
 			if (args.noDebug) {
@@ -431,6 +457,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 				) {
 					return { prefix: pair[0] + "=", path: pair[1] };
 				}
+
 				return { prefix: arg };
 			} else {
 				// arg is a path
@@ -445,6 +472,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 				} catch (err) {
 					// file not found
 				}
+
 				return { path: arg }; // just return the path blindly and hope for the best...
 			}
 		});
@@ -473,9 +501,11 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 						) {
 							this.nodeProcessId = response.body.processId;
 						}
+
 						resolve();
 					} else {
 						reject(errors.cannotDebugExtension(response.message));
+
 						this.terminateSession(
 							"launchVSCode error: " + response.message,
 						);
@@ -511,6 +541,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 			args.cwd,
 			args.sourceMapPathOverrides,
 		);
+
 		fixNodeInternalsSkipFiles(args);
 
 		args.smartStep =
@@ -549,7 +580,9 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 			websocketUrl,
 			extraCRDPChannelPort,
 		);
+
 		this.beginWaitingForDebuggerPaused();
+
 		this.getNodeProcessDetailsIfNeeded();
 
 		this._session.sendEvent(
@@ -576,9 +609,11 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 						// since node starts in a terminal, we cannot track it with an 'exit' handler
 						// plan for polling after we have gotten the process pid.
 						this._pollForNodeProcess = true;
+
 						resolve();
 					} else {
 						reject(errors.cannotLaunchInTerminal(response.message));
+
 						this.terminateSession(
 							"terminal error: " + response.message,
 						);
@@ -596,6 +631,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 	): Promise<void> {
 		// merge environment variables into a copy of the process.env
 		const env = Object.assign({}, process.env, envArgs);
+
 		Object.keys(env)
 			.filter((k) => env[k] === null)
 			.forEach((key) => delete env[key]);
@@ -615,6 +651,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 			for (const a of launchArgs) {
 				if (a.indexOf(" ") > 0) {
 					args.push(`"${a}"`);
+
 					foundArgWithSpace = true;
 				} else {
 					args.push(a);
@@ -623,34 +660,44 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 
 			if (foundArgWithSpace) {
 				launchArgs = args;
+
 				runtimeExecutable = `"${runtimeExecutable}"`;
+
 				spawnOpts.shell = true;
 			}
 		}
 
 		this.logLaunchCommand(runtimeExecutable, launchArgs);
+
 		spawnOpts.detached = this.supportsTerminateRequest; // https://github.com/Microsoft/vscode/issues/57018
 		const nodeProcess = cp.spawn(runtimeExecutable, launchArgs, spawnOpts);
 
 		return new Promise<void>((resolve, reject) => {
 			this.nodeProcessId = nodeProcess.pid;
+
 			nodeProcess.on("error", (error) => {
 				reject(errors.cannotLaunchDebugTarget(errors.toString()));
 
 				const msg = `Node process error: ${error}`;
+
 				logger.error(msg);
+
 				this.terminateSession(msg);
 			});
+
 			nodeProcess.on("exit", () => {
 				const msg = "Target exited";
+
 				logger.log(msg);
 
 				if (!this.isExtensionHost()) {
 					this.terminateSession(msg);
 				}
 			});
+
 			nodeProcess.on("close", (code) => {
 				const msg = "Target closed";
+
 				logger.log(msg);
 
 				if (!this.isExtensionHost()) {
@@ -671,6 +718,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 					!this._launchAttachArgs._suppressConsoleOutput
 				) {
 					let msg = data.toString();
+
 					this._session.sendEvent(new OutputEvent(msg, "stdout"));
 				}
 			});
@@ -702,6 +750,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 
 				if (chromeMsgIndex >= 0) {
 					msg = msg.substr(0, chromeMsgIndex);
+
 					isLastEarlyNodeMsg = true;
 				}
 
@@ -709,11 +758,13 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 
 				if (msgMatch) {
 					isLastEarlyNodeMsg = true;
+
 					msg = msg.replace(NodeDebugAdapter.DEBUG_BRK_DEP_MSG, "");
 				}
 
 				const helpMsg =
 					/For help see https:\/\/nodejs.org\/en\/docs\/inspector\s*/;
+
 				msg = msg.replace(helpMsg, "");
 			}
 
@@ -762,6 +813,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 				const buffer = utils.stripBOM(
 					fs.readFileSync(args.envFile, "utf8"),
 				);
+
 				buffer.split("\n").forEach((line) => {
 					const r = line.match(/^\s*([\w\.\-]+)\s*=\s*(.*)?\s*$/);
 
@@ -779,6 +831,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 							) {
 								value = value.replace(/\\n/gm, "\n");
 							}
+
 							env[key] = value.replace(/(^['"]|['"]$)/g, "");
 						}
 					}
@@ -814,6 +867,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 
 		if (this._continueAfterConfigDone) {
 			this._expectingStopReason = undefined;
+
 			await this.continue(/*internal=*/ true);
 		} else if (this._entryPauseEvent) {
 			await this.onPaused(this._entryPauseEvent);
@@ -822,6 +876,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 		this.events.emit(ChromeDebugSession.FinishedStartingUpEventName, {
 			requestedContentWasDetected: true,
 		} as FinishedStartingUpEventArguments);
+
 		await super.configurationDone();
 	}
 
@@ -831,6 +886,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 				logger.log("Not killing launched process. It has PID=1");
 			} else {
 				logger.log("Killing process with id: " + this.nodeProcessId);
+
 				utils.killTree(this.nodeProcessId);
 			}
 
@@ -854,12 +910,14 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 
 			try {
 				logger.log(`Sending SIGINT to ${groupPID}`);
+
 				process.kill(groupPID, "SIGINT");
 			} catch (e) {
 				if (e.message === "kill ESRCH") {
 					logger.log(
 						`Got 'kill ESRCH'. Sending SIGINT to ${this.nodeProcessId}`,
 					);
+
 					process.kill(this.nodeProcessId, "SIGINT");
 				}
 			}
@@ -899,8 +957,11 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 		// If we don't have the entry location, this must be the entry pause
 		if (this._waitingForEntryPauseEvent) {
 			logger.log(Date.now() / 1000 + ": Paused on entry");
+
 			this._expectingStopReason = "entry";
+
 			this._entryPauseEvent = notification;
+
 			this._waitingForEntryPauseEvent = false;
 
 			if (
@@ -915,6 +976,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 			}
 
 			await this.getNodeProcessDetailsIfNeeded();
+
 			await this.sendInitializedEvent();
 
 			return { didPause: true };
@@ -952,6 +1014,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 				logger.log(
 					`Launch: program '${programPath}' seems to be the source; launch the generated file '${generatedPath}' instead`,
 				);
+
 				programPath = generatedPath;
 			} else {
 				logger.log(
@@ -1012,6 +1075,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 			: typeof timeout === "number"
 				? Math.floor(timeout / checkPausedInterval)
 				: 100;
+
 		logger.log(Date.now() / 1000 + ": Waiting for initial debugger pause");
 
 		const id = setInterval(() => {
@@ -1024,8 +1088,11 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 					Date.now() / 1000 +
 						": Did not get a pause event after starting, so continuing",
 				);
+
 				clearInterval(id);
+
 				this._continueAfterConfigDone = false;
+
 				this._waitingForEntryPauseEvent = false;
 
 				this.getNodeProcessDetailsIfNeeded().then(() =>
@@ -1099,6 +1166,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 			}
 
 			this._loggedTargetVersion = true;
+
 			logger.log(`Target node version: ${version} ${arch}`);
 			/* __GDPR__
                 "nodeVersion" : {
@@ -1130,7 +1198,9 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 				}
 			} catch (e) {
 				clearInterval(intervalId);
+
 				logger.log("Target process died");
+
 				this.terminateSession("Target process died");
 			}
 		}, NodeDebugAdapter.NODE_TERMINATION_POLL_INTERVAL);
@@ -1146,6 +1216,7 @@ export class NodeDebugAdapter extends ChromeDebugAdapter {
 			} else {
 				cli += a;
 			}
+
 			cli += " ";
 		}
 
@@ -1272,6 +1343,7 @@ function getSourceMapPathOverrides(
 function fixNodeInternalsSkipFiles(args: ICommonRequestArgs): void {
 	if (args.skipFiles) {
 		args.skipFileRegExps = args.skipFileRegExps || [];
+
 		args.skipFiles = args.skipFiles.filter((pattern) => {
 			const fixed = fixNodeInternalsSkipFilePattern(pattern);
 
@@ -1309,6 +1381,7 @@ function resolveCwdPattern(
 
 	for (let pattern in sourceMapPathOverrides) {
 		const replacePattern = sourceMapPathOverrides[pattern];
+
 		resolvedOverrides[pattern] = replacePattern;
 
 		const cwdIndex = replacePattern.indexOf("${cwd}");

@@ -5,4 +5,5 @@ function f() {
 }
 
 callbackCaller(f);
+
 console.log("stepped over caught exception");

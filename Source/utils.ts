@@ -19,6 +19,7 @@ export class JavaScriptDeterminant {
 		"*.jsx",
 		"*.mjs",
 	];
+
 	private customPatterns: ReadonlyArray<string> = [];
 
 	public updatePatterns(patterns: ReadonlyArray<string>) {
@@ -41,7 +42,9 @@ export class JavaScriptDeterminant {
 			const buffer = Buffer.alloc(30);
 
 			const fd = fs.openSync(aPath, "r");
+
 			fs.readSync(fd, buffer, 0, buffer.length, 0);
+
 			fs.closeSync(fd);
 
 			const line = buffer.toString();
@@ -72,6 +75,7 @@ export function killTree(processId: number): void {
 		// on linux and OS X we kill all direct and indirect child processes as well
 		try {
 			const cmd = path.join(__dirname, "./terminateProcess.sh");
+
 			cp.spawnSync(cmd, [processId.toString()]);
 		} catch (err) {}
 	}
@@ -95,6 +99,7 @@ export function stripBOM(s: string): string {
 	if (s && s[0] === "\uFEFF") {
 		s = s.substr(1);
 	}
+
 	return s;
 }
 

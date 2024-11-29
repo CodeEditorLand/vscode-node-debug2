@@ -14,7 +14,9 @@ type OutputCaptureType = "console" | "std";
 
 export interface ICommonRequestArgs extends Core.ICommonRequestArgs {
 	stopOnEntry?: boolean;
+
 	address?: string;
+
 	timeout?: number;
 	/** Optional cwd for sourceMapPathOverrides resolution */
 	cwd?: string;
@@ -43,6 +45,7 @@ export interface ILaunchRequestArguments
 	runtimeArgs?: string[];
 	/** Optional environment variables to pass to the debuggee. The string valued properties of the 'environmentVariables' are used as key/value pairs. */
 	env?: { [key: string]: string | null };
+
 	envFile?: string;
 	/** Where to launch the debug target. */
 	console?: ConsoleType;
@@ -52,10 +55,12 @@ export interface ILaunchRequestArguments
 	outputCapture?: OutputCaptureType;
 	/** Use Windows Subsystem for Linux */
 	useWSL?: boolean;
+
 	runtimeVersion?: string;
 
 	/** Logging options */
 	diagnosticLogging?: boolean;
+
 	verboseDiagnosticLogging?: boolean;
 
 	// extensionHost option
@@ -89,11 +94,13 @@ export interface IAttachRequestArguments
  */
 export interface ILaunchVSCodeArgument {
 	prefix?: string;
+
 	path?: string;
 }
 
 export interface ILaunchVSCodeArguments {
 	args: ILaunchVSCodeArgument[];
+
 	env?: { [key: string]: string | null };
 }
 

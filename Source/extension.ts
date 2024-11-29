@@ -12,6 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
 			toggleSkippingFile,
 		),
 	);
+
 	context.subscriptions.push(
 		vscode.debug.registerDebugConfigurationProvider(
 			"legacy-extensionHost",
@@ -25,12 +26,14 @@ export function deactivate() {}
 function toggleSkippingFile(path: string | number): void {
 	if (!path) {
 		const activeEditor = vscode.window.activeTextEditor;
+
 		path = activeEditor && activeEditor.document.fileName;
 	}
 
 	if (path && vscode.debug.activeDebugSession) {
 		const args: Core.IToggleSkipFileStatusArgs =
 			typeof path === "string" ? { path } : { sourceReference: path };
+
 		vscode.debug.activeDebugSession.customRequest(
 			"toggleSkipFileStatus",
 			args,
