@@ -2,7 +2,7 @@
 	"dependencies": {},
 	"description": "Test project for vscode-node-debug2 using webpack",
 	"devDependencies": {
-		"@types/node": "22.10.0",
+		"@types/node": "22.10.1",
 		"ts-loader": "9.5.1"
 	},
 	"name": "testdata-webpack",
