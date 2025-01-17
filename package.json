@@ -444,7 +444,7 @@
 	},
 	"devDependencies": {
 		"@types/minimatch": "5.1.2",
-		"@types/node": "22.10.6",
+		"@types/node": "22.10.7",
 		"del": "8.0.0",
 		"event-stream": "4.0.1",
 		"find-free-port": "2.0.0",
